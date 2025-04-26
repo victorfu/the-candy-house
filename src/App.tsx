@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 interface ScriptLine {
   role: string;
@@ -63,6 +63,7 @@ const colors: Record<string, string> = {
 
 export default function CandyHouseApp() {
   const audioRefs = useRef<HTMLAudioElement[]>([]);
+  const [showTopButton, setShowTopButton] = useState(false);
 
   const setAudioRef = (index: number) => (el: HTMLAudioElement | null) => {
     if (el) {
@@ -74,37 +75,61 @@ export default function CandyHouseApp() {
     audioRefs.current[index]?.play();
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const halfScreen = window.innerHeight / 2;
+      setShowTopButton(window.scrollY > halfScreen);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-100 p-4 flex flex-col items-center">
       <h1 className="text-center text-4xl font-bold mb-8 text-gray-600 drop-shadow-md">The Candy House</h1>
-      <div className="w-full max-w-3xl space-y-6 px-4">
-        {script.map((line, index) => (
-          <div
-            key={index}
-            className="p-6 bg-white rounded-2xl shadow-lg flex flex-col md:flex-row items-start md:items-center md:justify-start hover:scale-105 transition-transform"
-          >
-            <div className="flex flex-col md:flex-row md:items-center md:space-x-4 w-full">
-              <p
-                className="text-xl md:text-2xl font-semibold mb-2 md:mb-0"
-                style={{ color: colors[line.role] || "black" }}
-              >
-                {line.role}
-              </p>
-              <p className="text-base md:text-lg text-gray-700 flex-1">{line.text}</p>
-              <button
-                className="mt-2 md:mt-0 px-4 py-2 bg-pink-400 text-white rounded-lg hover:bg-pink-500"
-                onClick={() => playAudio(index)}
-              >
-                ▶️
-              </button>
-              <audio
-                ref={setAudioRef(index)}
-                src={`/assets/audio/${index + 1}.aac`}
-              />
+      <div className="w-full flex justify-center">
+        <div className="w-full max-w-3xl space-y-6 px-4">
+          {script.map((line, index) => (
+            <div
+              key={index}
+              className="p-6 bg-white rounded-2xl shadow-lg flex flex-col md:flex-row items-start md:items-center md:justify-start hover:scale-105 transition-transform"
+            >
+              <div className="flex flex-col md:flex-row md:items-center md:space-x-4 w-full">
+                <p
+                  className="text-xl md:text-2xl font-semibold mb-2 md:mb-0"
+                  style={{ color: colors[line.role] || "black" }}
+                >
+                  {line.role}
+                </p>
+                <p className="text-base md:text-lg text-gray-700 flex-1">{line.text}</p>
+                <button
+                  className="mt-2 md:mt-0 px-4 py-2 bg-pink-400 text-white rounded-lg hover:bg-pink-500"
+                  onClick={() => playAudio(index)}
+                >
+                  ▶️ Play
+                </button>
+                <audio
+                  ref={setAudioRef(index)}
+                  src={`/assets/audio/${index + 1}.aac`}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+      {showTopButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 p-3 rounded-full bg-pink-500 hover:bg-pink-600 text-white shadow-lg"
+        >
+          🔝
+        </button>
+      )}
     </div>
   );
 }
