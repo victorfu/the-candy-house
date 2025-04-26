@@ -90,8 +90,8 @@ export default function CandyHouseApp() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-100 dark:from-gray-300 dark:to-gray-400 p-4 flex flex-col items-center relative">
-      <h1 className="text-4xl font-bold mb-8 text-gray-500 dark:text-white-300 drop-shadow-md text-center">The Candy House</h1>
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-100 dark:from-gray-800 dark:to-gray-900 p-4 flex flex-col items-center relative">
+      <h1 className="text-4xl font-bold mb-8 text-gray-600 dark:text-white-300 drop-shadow-md text-center">The Candy House</h1>
       <div className="w-full flex justify-center">
         <div className="w-full max-w-3xl space-y-6 px-4">
           {script.map((line, index) => (
