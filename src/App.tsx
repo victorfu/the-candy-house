@@ -111,7 +111,7 @@ export default function CandyHouseApp() {
                   className="mt-2 md:mt-0 px-4 py-2 bg-pink-400 text-white rounded-lg hover:bg-pink-500"
                   onClick={() => playAudio(index)}
                 >
-                  ▶️ Play
+                  ▶️
                 </button>
                 <audio
                   ref={setAudioRef(index)}
