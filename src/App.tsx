@@ -99,7 +99,7 @@ export default function CandyHouseApp() {
               </button>
               <audio
                 ref={setAudioRef(index)}
-                src={`/src/assets/audio/${index + 1}.aac`}
+                src={`/assets/audio/${index + 1}.aac`}
               />
             </div>
           </div>
