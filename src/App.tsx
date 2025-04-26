@@ -49,16 +49,16 @@ const script: ScriptLine[] = [
 ];
 
 const colors: Record<string, string> = {
-  Ollie: "#a855f7",       // 紫色
+  Ollie: "#a855f7",        // 紫色
   "旁白-Ollie": "#a855f7", // 紫色
-  Kelly: "#facc15",       // 黃色
-  "旁白-Kelly": "#facc15", // 黃色
-  Ryder: "#3b82f6",       // 藍色
-  "旁白-Ryder": "#3b82f6", // 藍色
-  "Elf-Ollie": "#ef4444", // 紅色
-  "Elf-Kelly": "#ef4444", // 紅色
+  Kelly: "#facc15",        // 黃色
+  "旁白-Kelly": "#facc15",  // 黃色
+  Ryder: "#3b82f6",        // 藍色
+  "旁白-Ryder": "#3b82f6",  // 藍色
+  "Elf-Ollie": "#ef4444",   // 紅色
+  "Elf-Kelly": "#ef4444",   // 紅色
   "Kelly/Ryder": "#fb923c", // 橘色
-  "開場": "#10b981", // 青綠色
+  "開場": "#10b981",         // 青綠色
 };
 
 export default function CandyHouseApp() {
@@ -90,14 +90,14 @@ export default function CandyHouseApp() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-100 p-4 flex flex-col items-center">
-      <h1 className="text-center text-4xl font-bold mb-8 text-gray-600 drop-shadow-md">The Candy House</h1>
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-100 dark:from-gray-300 dark:to-gray-400 p-4 flex flex-col items-center relative">
+      <h1 className="text-4xl font-bold mb-8 text-gray-500 dark:text-white-300 drop-shadow-md text-center">The Candy House</h1>
       <div className="w-full flex justify-center">
         <div className="w-full max-w-3xl space-y-6 px-4">
           {script.map((line, index) => (
             <div
               key={index}
-              className="p-6 bg-white rounded-2xl shadow-lg flex flex-col md:flex-row items-start md:items-center md:justify-start hover:scale-105 transition-transform"
+              className="p-6 bg-white dark:bg-gray-700 rounded-2xl shadow-lg flex flex-col md:flex-row items-start md:items-center md:justify-start hover:scale-105 transition-transform"
             >
               <div className="flex flex-col md:flex-row md:items-center md:space-x-4 w-full">
                 <p
@@ -106,9 +106,9 @@ export default function CandyHouseApp() {
                 >
                   {line.role}
                 </p>
-                <p className="text-base md:text-lg text-gray-700 flex-1">{line.text}</p>
+                <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 flex-1">{line.text}</p>
                 <button
-                  className="mt-2 md:mt-0 px-4 py-2 bg-pink-400 text-white rounded-lg hover:bg-pink-500"
+                  className="mt-2 md:mt-0 px-4 py-2 bg-gray-100 dark:bg-pink-100 text-white rounded-lg hover:bg-pink-200 dark:hover:bg-pink-200"
                   onClick={() => playAudio(index)}
                 >
                   ▶️
@@ -125,7 +125,7 @@ export default function CandyHouseApp() {
       {showTopButton && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 p-3 rounded-full bg-pink-500 hover:bg-pink-600 text-white shadow-lg"
+          className="fixed bottom-6 right-6 p-3 rounded-full bg-gray-200 dark:bg-pink-100 hover:bg-pink-200 dark:hover:bg-pink-200 text-white shadow-lg"
         >
           🔝
         </button>
